@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
-
+char *_strcat(char *dest, char *src);
 void print_diagsums(int *a, int size);
 void print_chessboard(char (*a)[8]);
 char *_strstr(char *haystack, char *needle);
