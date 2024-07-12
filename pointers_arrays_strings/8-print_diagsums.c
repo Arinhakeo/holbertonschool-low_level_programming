@@ -1,27 +1,63 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
- * print_diagsums - Prints the sums of the two diagonals of a square matrix
- * @a: Pointer to the first element of the matrix
- * @size: The size of the matrix (number of rows/columns)
- *
- * Description: This function calculates and prints the sum of the two
- * diagonals of a square matrix. The matrix is stored as a 1D array.
- * The primary diagonal is from the top-left to the bottom-right.
- * The secondary diagonal is from the top-right to the bottom-left.
- *
- * Return: void
- */
-void print_diagsums(int *a, int size)
-
-	int c3, 3;
-	int c5, 5;
+* print_number - Prints an integer using write.
+* @n: The integer to print.
+*/
+void print_number(int n)
 {
-	c3 = "[1][1] + [2][2] + [3][3]";
-	3 = "[1][3] + [2][2] + [3][1]";
-	c5 = "[1][1] + [2][2] + [3][3] + [4][4] + [5][5]";
-	5 = "[1][5] + [2][4] + [3][3] + [4][2] + [5][1]";
-}
-write(c3, 3);
-write(c5, 5);
+	char buffer[12];
+	int i = 0;
+	int negative = 0;
 
+	if (n == 0)
+	{
+		write(1, "0", 1);
+		return;
+	}
+
+	if (n < 0)
+	{
+		negative = 1;
+		n = -n;
+	}
+
+	while (n > 0)
+	{
+		buffer[i++] = (n % 10) + '0';
+		n /= 10;
+	}
+
+	if (negative)
+	{
+		buffer[i++] = '-';
+	}
+
+	while (i--)
+	{
+		write(1, &buffer[i], 1);
+	}
+}
+
+/**
+* print_diagsums - Prints the sum of the two diagonals of a square matrix.
+* @a: The matrix represented as a 1D array.
+* @size: The size of the matrix (number of rows/columns).
+*/
+void print_diagsums(int *a, int size)
+{
+	int i;
+	int sum1 = 0, sum2 = 0;
+
+	for (i = 0; i < size; i++)
+	{
+		sum1 += a[i * size + i];
+		sum2 += a[i * size + (size - 1 - i)];
+	}
+
+	print_number(sum1);
+	write(1, ", ", 2);
+	print_number(sum2);
+	write(1, "\n", 1);
+}
