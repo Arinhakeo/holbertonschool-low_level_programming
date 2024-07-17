@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdarg.h>
 #include <stdarg.h>
 /**
 * sum_them_all - Returns the sum of all its parameters
