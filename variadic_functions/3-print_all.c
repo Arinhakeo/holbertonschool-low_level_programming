@@ -1,49 +1,40 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include "variadic_functions.h"
-/**
-* print_all - prints anything based on format provided
-* @format: list of types of arguments passed to the function
-*/
-void print_all(const char * const format, ...)
-{
 
-	va_list args;
-	int i = 0;
-	char *str;
+void print_char(va_list arg)
+{ printf("%c", va_arg(arg, int)); }
+void print_int(va_list arg)
+{ printf("%d", va_arg(arg, int)); }
+void print_float(va_list arg)
+{ printf("%f", va_arg(arg, double)); }
+void print_string(va_list arg)
+{ char *string = va_arg(arg, char *);
+	if (!string)
+	string = "(nil)";
+	printf("%s", string); }
+
+void print_all(const char * const format, ...)
+{	va_list args;
+	int i = 0, j;
+	char *separation = "";
+	void (*funcs[])(va_list) = {print_char, print_int, print_float, print_string};
+	char *types = "cifs";
 
 	va_start(args, format);
-
 	while (format && format[i])
+	{ j = 0;
+		while (types[j])
 	{
-		switch (format[i])
+		if (format[i] == types[j])
 		{
-			case 'c':
-				printf("%c", va_arg(args, int));
-				break;
-			case 'i':
-				printf("%d", va_arg(args, int));
-				break;
-			case 'f':
-				printf("%f", (float)va_arg(args, double));
-				break;
-			case 's':
-				str = va_arg(args, char *);
-				if (str == NULL)
-					printf("(nil)");
-				else
-					printf("%s", str);
-				break;
-			default:
-				i++;
-				continue;
+		printf("%s", separation);
+		funcs[j](args);
+		separation = ", ";
 		}
-
-		if (format[i + 1])
-			printf(", ");
-		i++;
+		j++;
 	}
-
+	i++;
+	}
 	printf("\n");
-	va_end(args);
+va_end(args);
 }
