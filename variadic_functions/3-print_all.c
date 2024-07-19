@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdarg.h>
-
+/**
+* print_char - Prints a character.
+* @args: A va_list containing the character to print.
+*/
 void print_char(va_list arg)
 { printf("%c", va_arg(arg, int)); }
 void print_int(va_list arg)
