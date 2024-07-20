@@ -8,7 +8,7 @@
 *@age: l'âge du chien
 *@owner: le proprio
 *
-*Return:vise vers le nouveau chien, ou le bute
+*Retour:vise vers le nouveau chien, ou le bute
 */
 dog_t *new_dog(char *name, float age, char *owner)
 {
@@ -42,11 +42,12 @@ if (dog->owner == NULL)
 		return (NULL);
 		}
 
-for (i = 0; i <= cleps; i++)
+	for (i = 0; i <= cleps; i++)
 	dog->name[i] = name[i];
     
-for (i = 0; i <= proprio; i++)
+	for (i = 0; i <= proprio; i++)
 	dog->owner[i] = owner[i];
+	
 	dog->age = age;
 
 return (dog);
