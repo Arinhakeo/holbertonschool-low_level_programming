@@ -3,42 +3,52 @@
 #include "dog.h"
 
 /**
-* new_dog - crée un nouveau chen
+* new_dog nouveau chien
 * @name: le nom du chien
 * @age: l'âge du chien
-* @owner: le propriétair
+* @owner: le proprio
 *
 * Return:vise vers le nouveau chien, ou le bute
 */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *dog;
-	char *chien, *proprio;
+    dog_t *dog;
+    int cleps, proprio, i;
 
-	dog = malloc(sizeof(dog_t));
-	if (dog == NULL)
-	return (NULL);
+    dog = malloc(sizeof(dog_t));
+    if (dog == NULL)
+        return (NULL);
 
-	chien = malloc(strlen(name) + 1);
-	if (chien == NULL)
-	{
-	free(dog);
-	return (NULL);
-	}
-	strcpy(chien, name);
+    cleps = 0;
+    while (name[cleps])
+        cleps++;
 
-	proprio = malloc(strlen(owner) + 1);
-	if (proprio == NULL)
-	{
-	free(chien);
-	free(dog);
-	return (NULL);
-	}
-	strcpy(proprio, owner);
+    proprio = 0;
+    while (owner[proprio])
+        proprio++;
 
-	dog->name = chien;
-	dog->age = age;
-	dog->owner = proprio;
+    dog->name = malloc(cleps + 1);
+    if (dog->name == NULL)
+    {
+        free(dog);
+        return (NULL);
+    }
 
-	return (dog);
+    dog->owner = malloc(proprio + 1);
+    if (dog->owner == NULL)
+    {
+        free(dog->name);
+        free(dog);
+        return (NULL);
+    }
+
+    for (i = 0; i <= cleps; i++)
+        dog->name[i] = name[i];
+    
+    for (i = 0; i <= proprio; i++)
+        dog->owner[i] = owner[i];
+
+    dog->age = age;
+
+    return (dog);
 }
