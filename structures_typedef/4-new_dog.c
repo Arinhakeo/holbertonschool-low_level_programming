@@ -28,14 +28,14 @@ proprio = 0;
 	proprio++;
 
 dog->name = malloc(cleps + 1);
-if(dog->name == NULL)
+	if (dog->name == NULL)
 {
 free(dog);
 	return (NULL);
 }
 
 dog->owner = malloc(proprio + 1);
-if(dog->owner == NULL)
+	if (dog->owner == NULL)
 		{
 		free(dog->name);
 		free(dog);
@@ -47,7 +47,7 @@ if(dog->owner == NULL)
 
 	for (i = 0; i <= proprio; i++)
 	dog->owner[i] = owner[i];
-	
+
 	dog->age = age;
 
 return (dog);
