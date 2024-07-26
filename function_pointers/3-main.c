@@ -1,6 +1,14 @@
 #include "3-calc.h"
-
-/* Fonction principale */
+/**
+ * main - Entry point
+ * @argc: The number of arguments
+ * @argv: The array of arguments
+ *
+ * Return: 0 on success
+ *         98 if the number of arguments is incorrect
+ *         99 if the operator is not one of the expected operators
+ *         100 if the user tries to divide by 0
+ */
 int main(int argc, char *argv[])
 {
     int num1, num2, result;
