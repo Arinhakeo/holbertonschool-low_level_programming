@@ -17,17 +17,17 @@ char *cap_string(char *str)
         {
             if (maj)
             {
-                /* Convert to uppercase by subtracting 'a' and adding 'A' */
+/* Convert to uppercase by subtracting 'a' and adding 'A' */
                 *str = *str - 'a' + 'A';
                 maj = 0;  /*Next characters are not the beginning of words*/
             }
         }
         else if (*str == ' ' || *str == '\t' || *str == '\n' || *str == ',' ||
-                 *str == ';' || *str == '.' || *str == '!' || *str == '?' ||
-                 *str == '"' || *str == '(' || *str == ')' || *str == '{' ||
-                 *str == '}')
+                *str == ';' || *str == '.' || *str == '!' || *str == '?' ||
+                *str == '"' || *str == '(' || *str == ')' || *str == '{' ||
+                *str == '}')
         {
-            maj = 1; /*Next letter after these characters should be capitalized*/
+        maj = 1; /*Next letter after these characters should be capitalized*/
         }
         else
         {
