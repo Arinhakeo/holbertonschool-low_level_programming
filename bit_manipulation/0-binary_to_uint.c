@@ -18,9 +18,8 @@ while (*b)
 if (*b != '0' && *b != '1')
 return (0);
 
-num = num * 2 + (*b - '0');
+num = (num << 1) | (*b - '0');
 b++;
 }
-
 return (num);
 }
