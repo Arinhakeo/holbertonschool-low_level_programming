@@ -1,22 +1,27 @@
+#include <stddef.h>
 #include "main.h"
 /*
 * File: 0-binary_to_uint.c
-* Author: Votre nom
-* Date: Date
+* convert unsigned int to resultat 0
+* binary file
 *
 * Description: Converts a binary number string to an unsigned integer.
 */
 unsigned int binary_to_uint(const char *b)
 {
-unsigned int result = 0;
-int i;
+	unsigned int resultat = 0;
 
-for (i = 0; b[i]; i++)
-{
-if (b[i] != '0' && b[i] != '1')
-return (0);
-result = result * 2 + (b[i] - '0');
-}
+	if (b == NULL)
+		return (0);
 
-return (result);
+	while (*b)
+	{
+		if (*b != '0' && *b != '1')
+			return (0);
+
+		resultat = resultat * 2 + (*b - '0');
+		b++;
+		}
+
+	return (resultat);
 }
