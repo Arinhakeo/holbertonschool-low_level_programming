@@ -1,12 +1,12 @@
 #include <stddef.h>
 #include "main.h"
+
 /*
-* File: 0-binary_to_uint.c
 * convert unsigned int to resultat 0
-* binary file
-*
+* @binary file
 * Description: Converts a binary number string to an unsigned integer.
 */
+
 unsigned int binary_to_uint(const char *b)
 {
 	unsigned int resultat = 0;
