@@ -1,45 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h>
 #include <unistd.h>
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-    int fd;
-    ssize_t bytes_read, bytes_written;
-    char *buffer;
+FILE *file;/*pointuer pour ld escripteur de fichiers*/
+ssize_t n_read = 0;/*nombre de caracteres lus*/
+int c;/*variable pour stocker le caractere lus*/
 
-    if (filename == NULL)
-        return (0);
+file = fopen(filename, "r");/*ouvre le fichier en lecture*/
+if (!file)
+return (0);/*Si pas d'ouverture affiche 0*/
 
-    fd = open(filename, O_RDONLY);
-    if (fd == -1)
-        return (0);
+while (letters > 0 && (c = fgetc(file)) != EOF)/*lis les caracteres du fichier et les affiches*/
+{
+if (write(STDOUT_FILENO, &c, 1) != 1)
+{
+fclose(file);
+return (0);/*En cas d'erreur d'écriture, fermer le fichier et retourne*/
+}
+n_read++;
+letters--;
+}
 
-    buffer = malloc(sizeof(char) * letters);
-    if (buffer == NULL)
-    {
-        close(fd);
-        return (0);
-    }
+fclose(file);/*ferme le fichier*/
 
-    bytes_read = read(fd, buffer, letters);
-    if (bytes_read == -1)
-    {
-        free(buffer);
-        close(fd);
-        return (0);
-    }
-
-    bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
-    if (bytes_written == -1 || bytes_written != bytes_read)
-    {
-        free(buffer);
-        close(fd);
-        return (0);
-    }
-
-    free(buffer);
-    close(fd);
-    return (bytes_written);
+return (n_read); /*Retourner le nombre de caractères ls*/
 }
