@@ -1,35 +1,45 @@
 #include "lists.h"
-
 /**
- * delete_dnodeint_at_index - Deletes the node at a given index of a dlistint_t list.
- * @head: Double pointer to the head of the list.
- * @index: The index of the node that should be deleted.
- *
- * Return: 1 if it succeeded, -1 if it failed.
- */
+* struct dlistint_s - doubly linked list
+* @n: integer
+* @prev: points to the previous node
+* @next: points to the next node
+*
+* Description: doubly linked list node structure
+*/
+
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-    dlistint_t *temp = *head;
-    unsigned int i;
+dlistint_t *current = *head;
+unsigned int i = 0;
 
-    // Si la liste est vide ou l'index est invalide, retourner -1
-    if (*head == NULL)
-        return (-1);
+if (*head == NULL)/* Si la liste est vide */
+return (-1);
 
-    // Suppression du premier nœud
-    if (index == 0)
-    {
-        *head = temp->next;
-        if (*head != NULL)
-            (*head)->prev = NULL;
-        free(temp);
-        return (1);
-    }
+while (current != NULL && i < index)/* Parcourir jusqu a l'index */
+{
+current = current->next;
+i++;
+}
 
-    // Trouver le nœud à supprimer
-    for (i = 0; temp != NULL && i < index; i++)
-        temp = temp->next;
+if (current == NULL)/* Si l'index est hors de porté*/
+return (-1);
 
-    // Si l'index est hors limites, retourner -1
-    if (temp == NULL)
-        return (-1);
+if (current == *head)/* Si le noeud a supprimer est le head*/
+{
+*head = current->next;/* Deplace le head vers le next noeud*/
+if (*head != NULL)
+(*head)->prev = NULL;/* le nouveau noeud n'a pas de prev
+}
+else
+{
+if (current->prev != NULL)
+current->prev->next = current->next;/* relie le noeud prev au next*/
+if (current->next != NULL)
+current->next->prev = current->prev;/* relie le noeud next au prev */
+}
+
+free(current);
+
+return (1);
+}
