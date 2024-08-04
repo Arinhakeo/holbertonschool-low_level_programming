@@ -1,4 +1,5 @@
 #include "lists.h"
+
 /**
 * struct dlistint_s - doubly linked list
 * @n: integer
@@ -7,7 +8,6 @@
 *
 * Description: doubly linked list node structure
 */
-
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
 dlistint_t *current = *head;
@@ -29,14 +29,14 @@ if (current == *head)/* Si le noeud a supprimer est le head*/
 {
 *head = current->next;/* Deplace le head vers le next noeud*/
 if (*head != NULL)
-(*head)->prev = NULL;/* le nouveau noeud n'a pas de prev
+(*head)->prev = NULL;/* le nouveau noeud n'a pas de prev*/
 }
 else
 {
 if (current->prev != NULL)
 current->prev->next = current->next;/* relie le noeud prev au next*/
 if (current->next != NULL)
-current->next->prev = current->prev;/* relie le noeud next au prev */
+current->next->prev = current->prev;/* relie le noeud next au prev*/
 }
 
 free(current);
